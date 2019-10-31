@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/txtLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/lbl_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+        app:layout_constraintStart_toStartOf="@+id/txtLogin"
+        app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+
+    <TextView
+        android:id="@+id/txt_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/lbl_senha"
+        app:layout_constraintEnd_toEndOf="@+id/editLogin"
+        app:layout_constraintStart_toStartOf="@+id/editLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editLogin" />
+
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/txt_senha"
+        app:layout_constraintStart_toStartOf="@+id/txt_senha"
+        app:layout_constraintTop_toBottomOf="@+id/txt_senha" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="autenticar"
+        android:text="@string/btn_autenticar"
+        app:layout_constraintEnd_toEndOf="@+id/editSenha"
+        app:layout_constraintStart_toStartOf="@+id/editSenha"
+        app:layout_constraintTop_toBottomOf="@+id/editSenha" />
+</androidx.constraintlayout.widget.ConstraintLayout>

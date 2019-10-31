@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".BaixaActivity"
+    tools:showIn="@layout/activity_baixa">
+
+    <TextView
+        android:id="@+id/txt_codigo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/lbl_codigo"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtCodigo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/txt_codigo"
+        app:layout_constraintStart_toStartOf="@+id/txt_codigo"
+        app:layout_constraintTop_toBottomOf="@+id/txt_codigo" />
+
+    <EditText
+        android:id="@+id/edtDescricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:ems="10"
+        android:enabled="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="textPersonName"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/edtCodigo"
+        app:layout_constraintStart_toStartOf="@+id/edtCodigo"
+        app:layout_constraintTop_toBottomOf="@+id/edtCodigo" />
+
+    <TextView
+        android:id="@+id/txt_quantidade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/lbl_quantidade_banco_dados"
+        app:layout_constraintEnd_toEndOf="@+id/edtDescricao"
+        app:layout_constraintStart_toStartOf="@+id/edtDescricao"
+        app:layout_constraintTop_toBottomOf="@+id/edtDescricao" />
+
+    <EditText
+        android:id="@+id/edtQuantidade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:duplicateParentState="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
+        app:layout_constraintEnd_toEndOf="@+id/txt_quantidade"
+        app:layout_constraintStart_toStartOf="@+id/txt_quantidade"
+        app:layout_constraintTop_toBottomOf="@+id/txt_quantidade" />
+
+    <TextView
+        android:id="@+id/txt_quantidade2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/lbl_quantidade"
+        app:layout_constraintEnd_toEndOf="@+id/edtQuantidade"
+        app:layout_constraintStart_toStartOf="@+id/edtQuantidade"
+        app:layout_constraintTop_toBottomOf="@+id/edtQuantidade" />
+
+    <EditText
+        android:id="@+id/edtQuantidade2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:ems="10"
+        android:inputType="numberSigned|number|textCapCharacters"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="@+id/txt_quantidade2"
+        app:layout_constraintStart_toStartOf="@+id/txt_quantidade2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_quantidade2" />
+
+
+    <RadioGroup
+        android:id="@+id/groupRadio"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@id/radioUso"
+        app:layout_constraintEnd_toEndOf="@+id/edtQuantidade2"
+        app:layout_constraintStart_toStartOf="@+id/edtQuantidade2"
+        app:layout_constraintTop_toBottomOf="@+id/edtQuantidade2">
+
+        <RadioButton
+            android:id="@+id/radioUso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_Uso" />
+
+        <RadioButton
+            android:id="@+id/radioPadaria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_Padaria" />
+
+        <RadioButton
+            android:id="@+id/radioQuebra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_quebra" />
+
+        <RadioButton
+            android:id="@+id/radioTroca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_troca" />
+    </RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>

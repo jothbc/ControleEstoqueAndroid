@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Controle Estoque</string>
+    <string name="action_settings">Settings</string>
+    <string name="lbl_login">Login</string>
+    <string name="lbl_senha">Senha</string>
+    <string name="btn_autenticar">Autenticar</string>
+    <string name="message_login_failed">Não Autenticado</string>
+    <string name="message_bem_vindo">Bem vindo</string>
+    <string name="title_activity_baixa">BaixaActivity</string>
+    <string name="txt_troca">Troca</string>
+    <string name="txt_quebra">Quebra</string>
+    <string name="txt_Padaria">Padaria</string>
+    <string name="txt_Uso"><![CDATA[Uso & Consumo]]></string>
+    <string name="lbl_codigo">Código</string>
+    <string name="lbl_quantidade">Quantidade a Lançar</string>
+    <string name="lbl_quantidade_banco_dados">Quantidade no Banco de Dados</string>
+    <string name="message_informar_codigo">Informe o código</string>
+    <string name="message_faltam_campos">Faltam campos a serem preenchidos</string>
+    <string name="title_usuario">Usuário:</string>
+    <string name="message_concluido">Concluído</string>
+</resources>

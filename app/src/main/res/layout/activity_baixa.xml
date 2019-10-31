@@ -32,4 +32,15 @@
         app:backgroundTint="#FFFFFF"
         app:srcCompat="@drawable/round_check_circle_outline_black_24dp2x" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="67dp"
+        android:layout_gravity="center|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#FFFFFF"
+        app:srcCompat="@drawable/round_scatter_plot_black_24dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

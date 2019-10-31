@@ -18,4 +18,7 @@
     <string name="message_faltam_campos">Faltam campos a serem preenchidos</string>
     <string name="title_usuario">Usuário:</string>
     <string name="message_concluido">Concluído</string>
+    <string name="message_produto_null">Algo de errado não esta certo.</string>
+    <string name="message_erro_operacao">Não foi possível realizar a operação.</string>
+    <string name="title_erro">Erro</string>
 </resources>

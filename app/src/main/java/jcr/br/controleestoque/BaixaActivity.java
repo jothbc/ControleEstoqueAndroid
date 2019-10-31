@@ -36,9 +36,6 @@ public class BaixaActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.setTitle(getString(R.string.title_usuario) + " " + MainActivity.login_string.toUpperCase());
 
-
-        //https://www.youtube.com/watch?v=125WPZHxU7E
-
         produto = new Produto();
 
         EditText codigo = findViewById(R.id.edtCodigo);

@@ -20,7 +20,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_baixa" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_baixa"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/float_lancar"
@@ -41,6 +45,6 @@
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="#FFFFFF"
-        app:srcCompat="@drawable/round_scatter_plot_black_24dp" />
+        app:srcCompat="@drawable/baseline_table_chart_black_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

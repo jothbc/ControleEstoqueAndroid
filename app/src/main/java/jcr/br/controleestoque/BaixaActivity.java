@@ -169,11 +169,12 @@ public class BaixaActivity extends AppCompatActivity {
                 break;
         }
         produto.quantidade = qtd;
+        produto.usuario = MainActivity.login_string;
 
         try {
-            HTTPServiceInsert service = new HTTPServiceInsert(produto);
+            HTTPServicePost service = new HTTPServicePost(produto);
             String resposta = service.execute(produto).get();
-            if (resposta.equals("concluido")) {
+            if (resposta.equals("true")) {
                 codigo.setText("");
                 codigo.requestFocus();
                 descricao.setText("");
@@ -186,7 +187,7 @@ public class BaixaActivity extends AppCompatActivity {
             } else {
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));
-                dialog.setMessage(getString(R.string.message_erro_operacao));
+                dialog.setMessage(getString(R.string.message_erro_operacao)+"\n"+resposta);
                 dialog.show();
                 //Snackbar.make(view, resposta, Snackbar.LENGTH_LONG).show();
             }

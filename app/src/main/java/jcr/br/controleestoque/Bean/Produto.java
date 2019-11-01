@@ -7,6 +7,7 @@ public class Produto implements Serializable {
     public String descricao;
     public double quantidade;
     public String tabela;
+    public String usuario;
 
     public Produto() {
         this.codigo = "0";

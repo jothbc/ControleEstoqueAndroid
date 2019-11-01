@@ -22,4 +22,8 @@
     <string name="message_erro_operacao">Não foi possível realizar a operação.</string>
     <string name="title_erro">Erro</string>
     <string name="lbl_quantidade_disponivel">Quantidade Disponível</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="txt_exit">Sair</string>
+    <string name="title_lancados">Lançados</string>
+    <string name="title_activity_list_lancados">ListLancadosActivity</string>
 </resources>

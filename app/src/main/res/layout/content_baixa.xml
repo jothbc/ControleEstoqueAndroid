@@ -10,7 +10,7 @@
     tools:showIn="@layout/activity_baixa">
 
     <TextView
-        android:id="@+id/txt_codigo"
+        android:id="@+id/txt_codigo_lista"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -29,9 +29,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/txt_codigo"
-        app:layout_constraintStart_toStartOf="@+id/txt_codigo"
-        app:layout_constraintTop_toBottomOf="@+id/txt_codigo" />
+        app:layout_constraintEnd_toEndOf="@+id/txt_codigo_lista"
+        app:layout_constraintStart_toStartOf="@+id/txt_codigo_lista"
+        app:layout_constraintTop_toBottomOf="@+id/txt_codigo_lista" />
 
     <EditText
         android:id="@+id/edtDescricao"
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:ems="10"
-        android:inputType="numberSigned|number|textCapCharacters"
+        android:inputType="none|numberDecimal"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="@+id/txt_quantidade2"
         app:layout_constraintStart_toStartOf="@+id/txt_quantidade2"

@@ -11,4 +11,10 @@ public class Produto implements Serializable {
     public Produto() {
         this.codigo = "0";
     }
+
+    public Produto(String codigo, String descricao,double quantidade){
+        this.codigo=codigo;
+        this.descricao=descricao;
+        this.quantidade=quantidade;
+    }
 }

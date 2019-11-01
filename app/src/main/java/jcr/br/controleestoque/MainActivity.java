@@ -50,12 +50,17 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_exit:
+                finish();
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     public void autenticar(View view) {
         EditText login, senha;
@@ -66,16 +71,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         String url = "http://187.4.229.36:9999/mercadows/webresources/ws/Usuario/get/";
-        String parametro = login.getText().toString().toUpperCase().trim() + "/" + senha.getText().toString();
+        String parametro = login.getText().toString().trim().toUpperCase() + "/" + senha.getText().toString();
         try {
             HTTPService service = new HTTPService(url, parametro);
             String resposta = service.execute(url, parametro).get();
             if (resposta.equals("autenticado")) {
                 autenticado = true;
-                login_string = login.getText().toString();
+                login_string = login.getText().toString().trim().toUpperCase();
                 Toast.makeText(this.getApplicationContext(), getString(R.string.message_bem_vindo) + " " + login.getText(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, BaixaActivity.class);
                 startActivity(intent);
+                finish();
             } else {
                 autenticado = false;
                 Snackbar.make(view, getString(R.string.message_login_failed), Snackbar.LENGTH_SHORT).show();

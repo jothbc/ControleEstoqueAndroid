@@ -6,15 +6,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_test"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_test"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ListLancadosActivity"
+            android:label="@string/title_activity_list_lancados"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".BaixaActivity"
             android:label="@string/title_activity_baixa"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

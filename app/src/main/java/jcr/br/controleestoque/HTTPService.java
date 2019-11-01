@@ -16,7 +16,6 @@ public class HTTPService extends AsyncTask<String, Void, String> {
     public HTTPService(String url, String codigo) throws MalformedURLException {
         this.codigo = codigo;
         this.url = new URL(url + codigo);
-        ;
     }
 
     @Override

@@ -1,13 +1,15 @@
 package jcr.br.controleestoque;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,7 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import jcr.br.controleestoque.Bean.Produto;
 
@@ -27,6 +30,7 @@ import jcr.br.controleestoque.Bean.Produto;
 public class BaixaActivity extends AppCompatActivity {
 
     private Produto produto;
+    public static List<Produto> lista_produtos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class BaixaActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.setTitle(getString(R.string.title_usuario) + " " + MainActivity.login_string.toUpperCase());
-
+        lista_produtos = new ArrayList<>();
         produto = new Produto();
 
         EditText codigo = findViewById(R.id.edtCodigo);
@@ -55,6 +59,26 @@ public class BaixaActivity extends AppCompatActivity {
                 iniciarScan(view);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_baixa, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_lancados:
+                System.out.println(lista_produtos.size());
+                Intent intent = new Intent(BaixaActivity.this,ListLancadosActivity.class);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void iniciarScan(View view) {
@@ -95,15 +119,24 @@ public class BaixaActivity extends AppCompatActivity {
             if (produto != null) {
                 descricao.setText(produto.descricao);
                 quantidade.setText(String.valueOf(produto.quantidade));
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                lista_produtos.add(new Produto(produto.codigo,produto.descricao,produto.quantidade));
+
             } else {
                 descricao.setText("");
                 quantidade.setText("");
-                Snackbar.make(view, (R.string.message_produto_null), Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(view, (R.string.message_produto_null), Snackbar.LENGTH_LONG).show();
+                AlertDialog dialog = new AlertDialog.Builder(this).create();
+                dialog.setTitle((R.string.title_erro));
+                dialog.setMessage(getString(R.string.message_produto_null));
+                dialog.show();
             }
         } catch (Exception e) {
             descricao.setText("");
             quantidade.setText("");
-            Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
+            //Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -113,7 +146,8 @@ public class BaixaActivity extends AppCompatActivity {
         EditText quantidade = findViewById(R.id.edtQuantidade2);
         EditText codigo = findViewById(R.id.edtCodigo);
         if (produto.codigo.equals("0") || quantidade.getText().toString().trim().isEmpty() || descricao.getText().toString().isEmpty()) {
-            Snackbar.make(view, getString(R.string.message_faltam_campos), Snackbar.LENGTH_LONG).show();
+            //Snackbar.make(view, getString(R.string.message_faltam_campos), Snackbar.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),getString(R.string.message_faltam_campos),Toast.LENGTH_LONG).show();
             return;
         }
         double qtd = Double.valueOf(quantidade.getText().toString().replaceAll(",", "\\."));
@@ -145,7 +179,10 @@ public class BaixaActivity extends AppCompatActivity {
                 descricao.setText("");
                 quantidade_1.setText("");
                 quantidade.setText("");
-                Snackbar.make(view, getString(R.string.message_concluido), Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(view, getString(R.string.message_concluido), Snackbar.LENGTH_LONG).show();
+                Toast.makeText(this.getApplicationContext(),getString(R.string.message_concluido),Toast.LENGTH_LONG).show();
+                lista_produtos.add(new Produto(produto.codigo,produto.descricao,produto.quantidade));
+
             } else {
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));

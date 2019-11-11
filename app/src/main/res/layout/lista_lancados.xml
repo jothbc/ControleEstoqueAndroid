@@ -13,6 +13,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="78910101010"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +24,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="um exemplo de algo"
+        android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/txt_quantidade_lista"
         app:layout_constraintStart_toEndOf="@+id/txt_codigo_lista"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +35,9 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="20"
+        android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </LinearLayout>

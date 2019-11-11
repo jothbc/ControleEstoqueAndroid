@@ -33,15 +33,17 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProdutoAdapter.ViewHolderProduto holder, int position) {
-        Produto produto = produtos.get(position);
-        holder.codigo.setText("Código: " + produto.codigo);
-        holder.descricao.setText("Desc: " + produto.descricao);
-        holder.quantidade.setText("QTD: " + Double.toString(produto.quantidade));
+        if (!produtos.isEmpty()) {
+            Produto produto = produtos.get(position);
+            holder.codigo.setText("Código: " + produto.codigo);
+            holder.descricao.setText("Desc: " + produto.descricao);
+            holder.quantidade.setText("QTD: " + Double.toString(produto.quantidade));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return produtos.size();
     }
 
     public class ViewHolderProduto extends RecyclerView.ViewHolder {

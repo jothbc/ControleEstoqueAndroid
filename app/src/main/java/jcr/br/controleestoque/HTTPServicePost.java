@@ -24,35 +24,10 @@ public class HTTPServicePost extends AsyncTask<Produto, Void, String> {
 
     @Override
     protected String doInBackground(Produto... produtos) {
-        /*
-        StringBuilder resposta = new StringBuilder();
-        try {
-            URL url = new URL("http://187.4.229.36:9999/mercadows/webresources/ws/Produto/insert/"+produto.codigo+"/"+produto.quantidade+"/"+produto.tabela);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept","text/html");
-            connection.setConnectTimeout(5000);
-            connection.connect();
-
-            Scanner scanner = new Scanner (url.openStream());
-            while (scanner.hasNext()){
-                resposta.append(scanner.next());
-            }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return resposta.toString();
-        */
          return sendPost("http://192.168.1.158:9999/mercadows/webresources/ws/Produto/post", new Gson().toJson(produto), "POST");
     }
 
-    public String sendPost(String url, String json,String metodo) {
-
+    private String sendPost(String url, String json,String metodo) {
         try {
             // Cria um objeto HttpURLConnection:
             HttpURLConnection request = (HttpURLConnection) new URL(url).openConnection();
@@ -65,7 +40,7 @@ public class HTTPServicePost extends AsyncTask<Produto, Void, String> {
                 // Define o content-type:
                 request.setRequestProperty("Content-Type", "application/json");
                 // Define o tempo máximo
-                request.setConnectTimeout(4000);
+                request.setConnectTimeout(3000);
 
                 // Define o método da requisição:
                 request.setRequestMethod(metodo);

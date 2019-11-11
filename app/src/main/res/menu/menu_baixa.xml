@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_lancados"
         android:title="@string/title_lancados" />
+    <item
+        android:id="@+id/action_consultar_preco"
+        android:title="@string/title_cons_preco" />
 </menu>

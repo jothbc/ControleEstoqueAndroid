@@ -18,7 +18,7 @@
     <string name="message_faltam_campos">Faltam campos a serem preenchidos</string>
     <string name="title_usuario">Usuário:</string>
     <string name="message_concluido">Concluído</string>
-    <string name="message_produto_null">Algo de errado não esta certo.</string>
+    <string name="message_produto_null">Produto não encontrado.</string>
     <string name="message_erro_operacao">Não foi possível realizar a operação.</string>
     <string name="title_erro">Erro</string>
     <string name="lbl_quantidade_disponivel">Quantidade Disponível</string>
@@ -26,4 +26,9 @@
     <string name="txt_exit">Sair</string>
     <string name="title_lancados">Lançados</string>
     <string name="title_activity_list_lancados">ListLancadosActivity</string>
+    <string name="title_activity_consulta_preco">ConsultaPrecoActivity</string>
+    <string name="lblDescricao">Descrição</string>
+    <string name="lbl_valor">Valor</string>
+    <string name="title_cons_preco">Consultar Preço</string>
+    <string name="title_consulta_preco">Consulta de Preço</string>
 </resources>

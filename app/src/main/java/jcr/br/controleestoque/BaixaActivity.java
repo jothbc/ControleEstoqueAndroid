@@ -70,12 +70,14 @@ public class BaixaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_lancados:
-                System.out.println(lista_produtos.size());
-                Intent intent = new Intent(BaixaActivity.this,ListLancadosActivity.class);
-                startActivity(intent);
-
+                Intent actLancados = new Intent(BaixaActivity.this, ListLancadosActivity.class);
+                startActivity(actLancados);
+                break;
+            case R.id.action_consultar_preco:
+                Intent actConsulta = new Intent(BaixaActivity.this,ConsultaPrecoActivity.class);
+                startActivity(actConsulta);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -93,7 +95,7 @@ public class BaixaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            if(result.getContents()!=null){
+            if (result.getContents() != null) {
                 EditText codigo = findViewById(R.id.edtCodigo);
                 codigo.setText(result.getContents());
                 getQuantidade(findViewById(R.id.layout_content_baixa));
@@ -119,14 +121,9 @@ public class BaixaActivity extends AppCompatActivity {
             if (produto != null) {
                 descricao.setText(produto.descricao);
                 quantidade.setText(String.valueOf(produto.quantidade));
-
-                ///////////////////////////////////////////////////////////////////////////////////////////////////////
-                lista_produtos.add(new Produto(produto.codigo,produto.descricao,produto.quantidade));
-
             } else {
                 descricao.setText("");
                 quantidade.setText("");
-                //Snackbar.make(view, (R.string.message_produto_null), Snackbar.LENGTH_LONG).show();
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));
                 dialog.setMessage(getString(R.string.message_produto_null));
@@ -135,8 +132,7 @@ public class BaixaActivity extends AppCompatActivity {
         } catch (Exception e) {
             descricao.setText("");
             quantidade.setText("");
-            //Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
-            Toast.makeText(this.getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -146,8 +142,7 @@ public class BaixaActivity extends AppCompatActivity {
         EditText quantidade = findViewById(R.id.edtQuantidade2);
         EditText codigo = findViewById(R.id.edtCodigo);
         if (produto.codigo.equals("0") || quantidade.getText().toString().trim().isEmpty() || descricao.getText().toString().isEmpty()) {
-            //Snackbar.make(view, getString(R.string.message_faltam_campos), Snackbar.LENGTH_LONG).show();
-            Toast.makeText(this.getApplicationContext(),getString(R.string.message_faltam_campos),Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(), getString(R.string.message_faltam_campos), Toast.LENGTH_LONG).show();
             return;
         }
         double qtd = Double.valueOf(quantidade.getText().toString().replaceAll(",", "\\."));
@@ -180,25 +175,20 @@ public class BaixaActivity extends AppCompatActivity {
                 descricao.setText("");
                 quantidade_1.setText("");
                 quantidade.setText("");
-                //Snackbar.make(view, getString(R.string.message_concluido), Snackbar.LENGTH_LONG).show();
-                Toast.makeText(this.getApplicationContext(),getString(R.string.message_concluido),Toast.LENGTH_LONG).show();
-                lista_produtos.add(new Produto(produto.codigo,produto.descricao,produto.quantidade));
-
+                Toast.makeText(this.getApplicationContext(), getString(R.string.message_concluido), Toast.LENGTH_LONG).show();
+                lista_produtos.add(new Produto(produto.codigo, produto.descricao, produto.quantidade));
             } else {
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));
-                dialog.setMessage(getString(R.string.message_erro_operacao)+"\n"+resposta);
+                dialog.setMessage(getString(R.string.message_erro_operacao) + "\n" + resposta);
                 dialog.show();
-                //Snackbar.make(view, resposta, Snackbar.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            //Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
             AlertDialog dialog = new AlertDialog.Builder(this).create();
             dialog.setTitle(R.string.title_erro);
             dialog.setMessage(getString(R.string.message_erro_operacao));
             dialog.show();
         }
-
     }
 
 }

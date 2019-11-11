@@ -23,12 +23,11 @@ public class HTTPService extends AsyncTask<String, Void, String> {
         StringBuilder resposta = new StringBuilder();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(5000);
-            connection.connect();
-
+            HttpURLConnection request = (HttpURLConnection) url.openConnection();
+            request.setRequestMethod("GET");
+            request.setRequestProperty("Accept", "application/json");
+            request.setConnectTimeout(3000);
+            request.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String inputLine;
 
@@ -36,8 +35,6 @@ public class HTTPService extends AsyncTask<String, Void, String> {
                 resposta.append(inputLine);
             }
             in.close();
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;

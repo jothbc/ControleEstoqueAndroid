@@ -13,9 +13,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ConsultaPrecoActivity"
+            android:label="@string/title_activity_consulta_preco"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ListLancadosActivity"
             android:label="@string/title_activity_list_lancados"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BaixaActivity"
             android:label="@string/title_activity_baixa"

@@ -114,7 +114,7 @@ public class BaixaActivity extends AppCompatActivity {
                 Snackbar.make(view, getString(R.string.message_informar_codigo), Snackbar.LENGTH_SHORT).show();
                 return;
             }
-            String url = "http://187.4.229.36:9999/mercadows/webresources/ws/Produto/get/";
+            String url = "Produto/get/";
             HTTPService service = new HTTPService(url, codigo.getText().toString());
             produto = new Gson().fromJson(service.execute(url, codigo.getText().toString()).get(), Produto.class);
 

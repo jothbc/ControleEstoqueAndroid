@@ -12,10 +12,11 @@ import java.net.URL;
 public class HTTPService extends AsyncTask<String, Void, String> {
     private final String codigo;
     private final URL url;
+    private final String base = "http://187.4.229.36:9999/mercadows/webresources/ws/";
 
     public HTTPService(String url, String codigo) throws MalformedURLException {
         this.codigo = codigo;
-        this.url = new URL(url + codigo);
+        this.url = new URL(base + url + codigo);
     }
 
     @Override

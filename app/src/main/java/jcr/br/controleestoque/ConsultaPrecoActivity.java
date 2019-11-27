@@ -70,7 +70,7 @@ public class ConsultaPrecoActivity extends AppCompatActivity {
         TextView descricao = findViewById(R.id.editDescricao);
         TextView valor = findViewById(R.id.editValor);
         try {
-            HTTPService service = new HTTPService("http://187.4.229.36:9999/mercadows/webresources/ws/Produto/get/", codigo);
+            HTTPService service = new HTTPService("Produto/get/preco/", codigo);
             String request = service.execute().get();
             Produto produto = new Gson().fromJson(request,Produto.class);
             descricao.setText(produto.descricao);

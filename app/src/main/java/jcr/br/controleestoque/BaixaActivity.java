@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import jcr.br.controleestoque.Bean.MyException;
 import jcr.br.controleestoque.Bean.Produto;
 
 
@@ -76,7 +77,7 @@ public class BaixaActivity extends AppCompatActivity {
                 startActivity(actLancados);
                 break;
             case R.id.action_consultar_preco:
-                Intent actConsulta = new Intent(BaixaActivity.this,ConsultaPrecoActivity.class);
+                Intent actConsulta = new Intent(BaixaActivity.this, ConsultaPrecoActivity.class);
                 startActivity(actConsulta);
                 break;
         }
@@ -114,9 +115,10 @@ public class BaixaActivity extends AppCompatActivity {
                 Snackbar.make(view, getString(R.string.message_informar_codigo), Snackbar.LENGTH_SHORT).show();
                 return;
             }
-            String url = "Produto/get/";
-            HTTPService service = new HTTPService(url, codigo.getText().toString());
-            produto = new Gson().fromJson(service.execute(url, codigo.getText().toString()).get(), Produto.class);
+            String caminho = "Produto/get/";
+            String param = codigo.getText().toString();
+            HTTPService service = new HTTPService(caminho, param);
+            produto = new Gson().fromJson(service.execute().get(), Produto.class);
 
             if (produto != null) {
                 descricao.setText(produto.descricao);
@@ -126,7 +128,7 @@ public class BaixaActivity extends AppCompatActivity {
                 quantidade.setText("");
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));
-                dialog.setMessage(getString(R.string.message_produto_null));
+                dialog.setMessage(getString(R.string.message_produto_null)+"\n"+String.valueOf(MyException.code));
                 dialog.show();
             }
         } catch (Exception e) {
@@ -167,20 +169,24 @@ public class BaixaActivity extends AppCompatActivity {
         produto.usuario = MainActivity.login_string;
 
         try {
-            HTTPServicePost service = new HTTPServicePost(produto);
-            String resposta = service.execute(produto).get();
-            if (resposta.equals("true")) {
-                codigo.setText("");
-                codigo.requestFocus();
-                descricao.setText("");
-                quantidade_1.setText("");
-                quantidade.setText("");
-                Toast.makeText(this.getApplicationContext(), getString(R.string.message_concluido), Toast.LENGTH_LONG).show();
-                lista_produtos.add(new Produto(produto.codigo, produto.descricao, produto.quantidade));
+            String caminho = "Produto/post";
+            String json = new Gson().toJson(produto);
+            HTTPServicePost service = new HTTPServicePost(json, caminho, "POST");
+            String response = service.execute().get();
+            if (response != null) {
+                if (response.equals("true")) {
+                    codigo.setText("");
+                    codigo.requestFocus();
+                    descricao.setText("");
+                    quantidade_1.setText("");
+                    quantidade.setText("");
+                    Toast.makeText(this.getApplicationContext(), getString(R.string.message_concluido), Toast.LENGTH_LONG).show();
+                    lista_produtos.add(new Produto(produto.codigo, produto.descricao, produto.quantidade));
+                }
             } else {
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));
-                dialog.setMessage(getString(R.string.message_erro_operacao) + "\n" + resposta);
+                dialog.setMessage(getString(R.string.message_erro_operacao) + "\n" + String.valueOf(MyException.code));
                 dialog.show();
             }
         } catch (Exception e) {

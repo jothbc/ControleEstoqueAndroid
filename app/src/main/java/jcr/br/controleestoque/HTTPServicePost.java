@@ -13,21 +13,27 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
+import jcr.br.controleestoque.Bean.MyException;
 import jcr.br.controleestoque.Bean.Produto;
 
-public class HTTPServicePost extends AsyncTask<Produto, Void, String> {
-    private final Produto produto;
+public class HTTPServicePost extends AsyncTask<String, Void, String> {
+    private final String base = "http://192.168.1.158:9999/mercadows/webresources/ws/";
+    private String caminho;
+    private String metodo;
+    private String json;
 
-    public HTTPServicePost(Produto produto) {
-        this.produto = produto;
+    public HTTPServicePost(String json, String caminho, String metodo) {
+        this.json = json;
+        this.caminho = caminho;
+        this.metodo = metodo;
     }
 
     @Override
-    protected String doInBackground(Produto... produtos) {
-         return sendPost("http://192.168.1.158:9999/mercadows/webresources/ws/Produto/post", new Gson().toJson(produto), "POST");
+    protected String doInBackground(String... params) {
+        return sendPost(base + caminho, json, metodo);
     }
 
-    private String sendPost(String url, String json,String metodo) {
+    private String sendPost(String url, String json, String metodo) {
         try {
             // Cria um objeto HttpURLConnection:
             HttpURLConnection request = (HttpURLConnection) new URL(url).openConnection();
@@ -55,7 +61,12 @@ public class HTTPServicePost extends AsyncTask<Produto, Void, String> {
 
                 // Caso você queira usar o código HTTP para fazer alguma coisa, descomente esta linha.
                 //int response = request.getResponseCode();
-                return readResponse(request);
+                MyException.code = request.getResponseCode();
+                if (request.getResponseCode() / 100 == 2) {
+                    return readResponse(request);
+                }else{
+                    return null;
+                }
             } finally {
                 request.disconnect();
             }
@@ -89,3 +100,4 @@ public class HTTPServicePost extends AsyncTask<Produto, Void, String> {
 
 
 }
+

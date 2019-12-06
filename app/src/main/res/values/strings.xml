@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JCR Controle Estoque</string>
+    <string name="app_name">Controle Estoque Sup. Correia</string>
     <string name="action_settings">Settings</string>
     <string name="lbl_login">Login</string>
     <string name="lbl_senha">Senha</string>
@@ -31,4 +31,5 @@
     <string name="lbl_valor">Valor</string>
     <string name="title_cons_preco">Consultar Preço</string>
     <string name="title_consulta_preco">Consulta de Preço</string>
+    <string name="message_erro">ERRO:</string>
 </resources>

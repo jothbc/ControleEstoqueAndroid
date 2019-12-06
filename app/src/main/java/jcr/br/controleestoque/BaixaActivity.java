@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -21,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +110,8 @@ public class BaixaActivity extends AppCompatActivity {
 
     private void getQuantidade(View view) {
         EditText descricao = findViewById(R.id.edtDescricao);
-        EditText quantidade = findViewById(R.id.edtQuantidade);
+        EditText quantidade_banco = findViewById(R.id.edtQuantidade);
+        EditText quantidade = findViewById(R.id.edtQuantidade2);
         try {
             EditText codigo = findViewById(R.id.edtCodigo);
             if (codigo.getText().toString().trim().equals("")) {
@@ -117,14 +120,21 @@ public class BaixaActivity extends AppCompatActivity {
             }
             String caminho = "Produto/get/";
             String param = codigo.getText().toString();
-            HTTPService service = new HTTPService(caminho, param);
-            produto = new Gson().fromJson(service.execute().get(), Produto.class);
+            String request =  new HTTPService(caminho, param).execute().get();
 
-            if (produto != null) {
+            if (request!=null) {
+                try {
+                    produto = new Gson().fromJson(request, Produto.class);
+                }catch (JsonSyntaxException e){
+                    Toast.makeText(this,"ALGO DEU ERRADO",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 descricao.setText(produto.descricao);
-                quantidade.setText(String.valueOf(produto.quantidade));
+                quantidade_banco.setText(String.valueOf(produto.quantidade));
+                quantidade.setText("1");
             } else {
                 descricao.setText("");
+                quantidade_banco.setText("");
                 quantidade.setText("");
                 AlertDialog dialog = new AlertDialog.Builder(this).create();
                 dialog.setTitle((R.string.title_erro));
@@ -133,14 +143,14 @@ public class BaixaActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             descricao.setText("");
-            quantidade.setText("");
+            quantidade_banco.setText("");
             Toast.makeText(this.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     public void lancarQuantidade(View view) {
         EditText descricao = findViewById(R.id.edtDescricao);
-        EditText quantidade_1 = findViewById(R.id.edtQuantidade);
+        EditText quantidade_banco = findViewById(R.id.edtQuantidade);
         EditText quantidade = findViewById(R.id.edtQuantidade2);
         EditText codigo = findViewById(R.id.edtCodigo);
         if (produto.codigo.equals("0") || quantidade.getText().toString().trim().isEmpty() || descricao.getText().toString().isEmpty()) {
@@ -178,7 +188,7 @@ public class BaixaActivity extends AppCompatActivity {
                     codigo.setText("");
                     codigo.requestFocus();
                     descricao.setText("");
-                    quantidade_1.setText("");
+                    quantidade_banco.setText("");
                     quantidade.setText("");
                     Toast.makeText(this.getApplicationContext(), getString(R.string.message_concluido), Toast.LENGTH_LONG).show();
                     lista_produtos.add(new Produto(produto.codigo, produto.descricao, produto.quantidade));

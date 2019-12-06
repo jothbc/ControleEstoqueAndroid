@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import jcr.br.controleestoque.Bean.CripMD5;
 import jcr.br.controleestoque.Bean.MyException;
 
 import android.view.View;
@@ -20,11 +21,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
 
     public static boolean autenticado = false;
     public static String login_string;
     private Button btnAuth;
+    private EditText login, senha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        login = findViewById(R.id.editLogin);
+        senha = findViewById(R.id.editSenha);
         MyException exception = new MyException();
         btnAuth = findViewById(R.id.btn_login);
         btnAuth.setOnClickListener(new View.OnClickListener() {
@@ -44,9 +51,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void autenticarViaMacWifi() {
+        if (!login.getText().toString().isEmpty()) {
+            if (senha.getText().toString().trim().isEmpty()) {
+                Toast.makeText(this, R.string.message_faltam_campos, Toast.LENGTH_LONG).show();
+                return;
+            }
+            String log, sen;
+            log = login.getText().toString().trim().toUpperCase();
+            sen = senha.getText().toString().trim();
+            sen = CripMD5.criptografar(sen);
+            try {
+                String caminho = "Usuario/get/";
+                String param = log + "/" + sen;
+                String response = new HTTPService(caminho, param).execute().get();
+                if (response != null) {
+                    if (!response.equals("autenticado")) {
+                        Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                } else {
+                    Toast.makeText(this, getString(R.string.message_erro) + String.valueOf(MyException.code), Toast.LENGTH_LONG).show();
+                    return;
+                }
+            } catch (MalformedURLException | InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
         String caminho = "Usuario/get/";
         String param = getMacWifi();
-        System.out.println("MAC WIFIIIIIIIIIIIIII: " + param);
         try {
             HTTPService service = new HTTPService(caminho, param);
             String request = service.execute().get();
